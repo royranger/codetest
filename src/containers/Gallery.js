@@ -8,13 +8,29 @@ class Gallery extends Component {
     super(props);
     this.state = {
       activeImage: 'https://upload.wikimedia.org/wikipedia/en/thumb/1/10/Winniethepooh.png/220px-Winniethepooh.png',
-      images: [
-        'https://static.tvtropes.org/pmwiki/pub/images/roo_9.gif',
-        'https://t00.deviantart.net/NmDURWDhAXcpYU52i7qIgHpyh5M=/fit-in/500x250/filters:fixed_height(100,100):origin()/pre00/f4fc/th/pre/f/2011/229/1/7/roo___winnie_the_pooh_by_xdogpaw-d46uuro.png',
-        'https://i.pinimg.com/236x/a1/e5/08/a1e508dd3b1d8073c20090aab358ddf1--baby-canvas-baby-joey.jpg',
-        'https://margosnotebook.files.wordpress.com/2017/02/kanga.jpg?w=705'
-      ]
+      images: [{active: '', inactive: 'https://upload.wikimedia.org/wikipedia/en/thumb/1/10/Winniethepooh.png/220px-Winniethepooh.png'}, {active: '', inactive: 'https://upload.wikimedia.org/wikipedia/en/thumb/1/10/Winniethepooh.png/220px-Winniethepooh.png'}]
     }
+  }
+
+  populateImages = () => {
+    const giphies = [];
+    fetch('https://api.giphy.com/v1/gifs/trending?api_key=PEyIrGaWdf08Lw4nezyXejpD9Y0pO6Rt')
+      .then(response=> response.json())
+      .then(resp=> {
+        resp.data.forEach(gif=> {
+          giphies.push({
+            inactive: gif.images.original_still.url,
+            active: gif.images.original.url
+          });
+        });
+      })
+      this.setState({
+        images: giphies
+      });
+  }
+
+  componentWillMount() {
+    this.populateImages();
   }
 
   render () {
