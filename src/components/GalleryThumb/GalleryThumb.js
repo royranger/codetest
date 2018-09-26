@@ -4,7 +4,7 @@ import './GalleryThumb.css';
 
 const GalleryThumb = ({images}) => {
   return (
-    <div>
+    <div className="flex flex-wrap">
       {
         images.map(image=> {
           return(

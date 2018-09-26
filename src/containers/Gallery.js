@@ -22,6 +22,7 @@ class Gallery extends Component {
 
     return(
       <div>
+        <h1>GALLERY</h1>
         <img src={activeImage}
              alt="activeimage"/>
         <GalleryThumb images={images}/>

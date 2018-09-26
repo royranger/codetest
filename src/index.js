@@ -1,6 +1,7 @@
 import React from 'react';
 import { render } from 'react-dom';
 import Gallery from './containers/Gallery';
+import 'tachyons';
 
 
 // GOAL: Create a React Gallery App with 1 large active image, and inactive thumb images below where you can change the active image
