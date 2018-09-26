@@ -1,5 +1,6 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { render } from 'react-dom';
+import Gallery from './containers/Gallery';
 
 
 // GOAL: Create a React Gallery App with 1 large active image, and inactive thumb images below where you can change the active image
@@ -13,24 +14,24 @@ import { render } from 'react-dom';
 // 5. On click of each GalleryThumb, update the active image
 // 6. Add a remove button on the GalleryThumb that deletes images when clicked
 // 7. Add a slick animation to transition between active images (that's more complex then just opacity)
-// 8. Add any extra styling & behaviour to make it look polished 
+// 8. Add any extra styling & behaviour to make it look polished
 
 
-class Gallery extends Component {
-
-  render() {
-    return (
-      <div>
-        [ Active Gallery Image Here ]
-    {/*Include thumbnails here*/}
-      </div>
-    )
-  }
-}
-
-
-class GalleryThumb extends Component {
-  /* Thumbnails */
-}
+// class Gallery extends Component {
+//
+//   render() {
+//     return (
+//       <div>
+//         [ Active Gallery Image Here ]
+//     {/*Include thumbnails here*/}
+//       </div>
+//     )
+//   }
+// }
+//
+//
+// class GalleryThumb extends Component {
+//   /* Thumbnails */
+// }
 
 render(<Gallery />, document.getElementById('root'));
