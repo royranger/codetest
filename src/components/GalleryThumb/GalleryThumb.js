@@ -2,7 +2,7 @@ import React from 'react';
 import Thumbnail from '../Thumbnail';
 import './GalleryThumb.css';
 
-const GalleryThumb = ({images}) => {
+const GalleryThumb = ({images, updateActiveImage}) => {
   return (
     <div className="flex flex-wrap">
       {
@@ -10,7 +10,9 @@ const GalleryThumb = ({images}) => {
           return (
             <Thumbnail
                     source={image.inactive}
-                    key={i}/>
+                    activeSource={image.active}
+                    key={i}
+                    updateActiveImage={updateActiveImage}/>
                   )
         })
       }

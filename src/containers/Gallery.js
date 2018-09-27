@@ -30,7 +30,13 @@ class Gallery extends Component {
       })
   }
 
-  componentWillMount() {
+  updateActiveImage = (newImage) => {
+    this.setState({
+      activeImage: newImage
+    });
+  }
+
+  componentDidMount() {
     this.populateImages();
   }
 
@@ -42,7 +48,8 @@ class Gallery extends Component {
         <h1>GALLERY</h1>
         <img src={activeImage}
              alt="activeimage"/>
-        <GalleryThumb images={images}/>
+        <GalleryThumb images={images}
+                      updateActiveImage={this.updateActiveImage}/>
         <Footer/>
 
       </div>
