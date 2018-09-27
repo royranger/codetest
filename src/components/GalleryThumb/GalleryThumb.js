@@ -6,10 +6,11 @@ const GalleryThumb = ({images}) => {
   return (
     <div className="flex flex-wrap">
       {
-        images.map(image=> {
+         images.map((image, i)=> {
           return (
             <Thumbnail
-                    source={image.inactive}/>
+                    source={image.inactive}
+                    key={i}/>
                   )
         })
       }

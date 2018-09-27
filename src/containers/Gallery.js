@@ -8,25 +8,26 @@ class Gallery extends Component {
     super(props);
     this.state = {
       activeImage: 'https://upload.wikimedia.org/wikipedia/en/thumb/1/10/Winniethepooh.png/220px-Winniethepooh.png',
-      images: [{active: '', inactive: 'https://upload.wikimedia.org/wikipedia/en/thumb/1/10/Winniethepooh.png/220px-Winniethepooh.png'}, {active: '', inactive: 'https://upload.wikimedia.org/wikipedia/en/thumb/1/10/Winniethepooh.png/220px-Winniethepooh.png'}]
+      images: []
     }
   }
 
   populateImages = () => {
-    const giphies = [];
     fetch('https://api.giphy.com/v1/gifs/trending?api_key=PEyIrGaWdf08Lw4nezyXejpD9Y0pO6Rt')
       .then(response=> response.json())
       .then(resp=> {
-        resp.data.forEach(gif=> {
-          giphies.push({
+        return resp.data.map(gif=> {
+          return({
             inactive: gif.images.original_still.url,
             active: gif.images.original.url
           });
         });
       })
-      this.setState({
-        images: giphies
-      });
+      .then(giphies=> {
+        this.setState({
+          images: giphies
+        });
+      })
   }
 
   componentWillMount() {
