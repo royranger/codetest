@@ -7,7 +7,7 @@ class Gallery extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      activeImage: 'https://upload.wikimedia.org/wikipedia/en/thumb/1/10/Winniethepooh.png/220px-Winniethepooh.png',
+      activeImage: 'https://media1.giphy.com/media/QNWKbJNASBum8G54t6/giphy.gif',
       images: []
     }
   }
@@ -45,9 +45,10 @@ class Gallery extends Component {
 
     return(
       <div>
-        <h1>GALLERY</h1>
+        <h1 className='f1 tc'>GIF GALLERY</h1>
         <img src={activeImage}
-             alt="activeimage"/>
+             alt="activeimage"
+             className="mw-100 vh-50 center db"/>
         <GalleryThumb images={images}
                       updateActiveImage={this.updateActiveImage}/>
         <Footer/>
