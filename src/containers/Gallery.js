@@ -8,7 +8,7 @@ class Gallery extends Component {
     super(props);
     this.state = {
       activeImage: 'https://media1.giphy.com/media/QNWKbJNASBum8G54t6/giphy.gif',
-      images: []
+      images: [{inactive: "https://media0.giphy.com/media/9tXzHqBALgR0NcbXG4/giphy_s.gif", active: "https://media0.giphy.com/media/9tXzHqBALgR0NcbXG4/giphy.gif"}]
     }
   }
 
@@ -36,8 +36,18 @@ class Gallery extends Component {
     });
   }
 
+  autoChangeImage = () => {
+    const {images} = this.state;
+    const randomGifIndex = Math.floor(Math.random()*images.length);
+    this.setState({
+      activeImage: images[randomGifIndex].active
+    });
+    setTimeout(this.autoChangeImage, 3000);
+  }
+
   componentDidMount() {
     this.populateImages();
+    this.autoChangeImage();
   }
 
   render () {
