@@ -4,7 +4,7 @@ import './GalleryThumb.css';
 
 const GalleryThumb = ({images, updateActiveImage, deleteThumbnail}) => {
   return (
-    <div className="flex flex-wrap">
+    <div className="flex flex-wrap justify-center">
       {
          images.map((image, i)=> {
           return (

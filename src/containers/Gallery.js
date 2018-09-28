@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import './Gallery.css';
+import Searchbox from '../components/Searchbox';
 import GalleryThumb from '../components/GalleryThumb/GalleryThumb';
 import Footer from '../components/Footer/Footer';
 
@@ -10,11 +11,12 @@ class Gallery extends Component {
     this.state = {
       activeImage: '',
       images: [{active: "https://media3.giphy.com/media/RLVcsR93HsqlIefxAs/200.gif"}],
-      caption: '#trending'
+      caption: '#trending',
+      searchTerm: ''
     }
   }
 
-  populateImages = () => {
+  getImages = () => {
     fetch('https://api.giphy.com/v1/gifs/trending?api_key=PEyIrGaWdf08Lw4nezyXejpD9Y0pO6Rt')
       .then(response=> response.json())
       .then(resp=> {
@@ -32,6 +34,35 @@ class Gallery extends Component {
       })
   }
 
+  getSearchImages = () => {
+    const {searchTerm} = this.state;
+    const query = searchTerm.replace(/ /g, '+');
+    const caption = searchTerm.replace(/ /g, '');
+
+    fetch(`https://api.giphy.com/v1/gifs/search?q=${query}&api_key=PEyIrGaWdf08Lw4nezyXejpD9Y0pO6Rt`)
+      .then(response=> response.json())
+      .then(resp=> {
+        return resp.data.map(gif=> {
+          return({
+            inactive: gif.images.original_still.url,
+            active: gif.images.fixed_height.url
+          });
+        });
+      })
+      .then(giphies=> {
+        this.setState({
+          images: giphies,
+          caption: `#${caption}`
+        });
+      })
+  }
+
+  handleEnter = (event) => {
+    if (event.key === 'Enter') {
+      this.getSearchImages();
+    }
+  }
+
   updateActiveImage = (newImage) => {
     this.setState({
       activeImage: newImage
@@ -45,6 +76,12 @@ class Gallery extends Component {
       activeImage: images[randomGifIndex].active
     });
     setTimeout(this.autoSetImage, 3000);
+  }
+
+  onSearchChange = (event) => {
+    this.setState({
+      searchTerm: event.target.value
+    });
   }
 
   deleteThumbnail = (index) => {
@@ -62,7 +99,7 @@ class Gallery extends Component {
   }
 
   componentDidMount() {
-    this.populateImages();
+    this.getImages();
     this.autoSetImage();
   }
 
@@ -72,6 +109,11 @@ class Gallery extends Component {
     return(
       <div>
         <h1 className='f1 tc'>GIF GALLERY</h1>
+
+        <Searchbox onSearchChange={this.onSearchChange}
+                   getSearchImages={this.getSearchImages}
+                   handleEnter={this.handleEnter}/>
+
         <div className='polaroidcontainer tc'>
           <div className='polaroid dib' caption={caption}>
             <img src={activeImage}
@@ -79,9 +121,6 @@ class Gallery extends Component {
                  className="vh-40 center db"/>
           </div>
         </div>
-
-
-
 
         <GalleryThumb images={images}
                       updateActiveImage={this.updateActiveImage}
