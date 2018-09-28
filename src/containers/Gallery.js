@@ -37,7 +37,7 @@ class Gallery extends Component {
   }
 
   getSearchImages = () => {
-    const {searchTerm, images} = this.state;
+    const {searchTerm} = this.state;
     const query = searchTerm.replace(/ /g, '+');
     const caption = searchTerm.replace(/ /g, '');
 
@@ -135,26 +135,27 @@ class Gallery extends Component {
 
     return(
       <div id='gallery' className='center'>
-        <h1 className='f1 tc'>GIF GALLERY</h1>
+        <div id='wrapper'>
+          <h1 className='f1 tc'>GIF GALLERY</h1>
 
-        <Searchbox onSearchChange={this.onSearchChange}
-                   getSearchImages={this.getSearchImages}
-                   handleEnter={this.handleEnter}/>
+          <Searchbox onSearchChange={this.onSearchChange}
+                     getSearchImages={this.getSearchImages}
+                     handleEnter={this.handleEnter}/>
 
-        <div className='polaroidcontainer tc'>
-          <div className='polaroid dib' caption={caption}>
-            <img src={activeImage}
-                 alt="activeimage"
-                 className="vh-40 center db"/>
+          <div className='polaroidcontainer tc'>
+            <div className='polaroid dib' caption={caption}>
+              <img src={activeImage}
+                   alt="activeimage"
+                   className="vh-40 center db"/>
+            </div>
           </div>
+          <ToggleTimer toggleTimer={this.toggleTimer}
+                       timer={timer}/>
+
+          <GalleryThumb images={images}
+                        updateActiveImage={this.updateActiveImage}
+                        deleteThumbnail={this.deleteThumbnail}/>
         </div>
-        <ToggleTimer toggleTimer={this.toggleTimer}
-                     timer={timer}/>
-
-        <GalleryThumb images={images}
-                      updateActiveImage={this.updateActiveImage}
-                      deleteThumbnail={this.deleteThumbnail}/>
-
 
 
         <Footer/>

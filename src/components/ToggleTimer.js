@@ -8,9 +8,9 @@ const ToggleTimer = ({toggleTimer, timer}) => {
     toggle = "Start";
   }
   return(
-    <div className='tc'
-          onClick={toggleTimer}>
-      <a className="f6 link br-pill ph3 pv2 mb2 dib gray bg-light-green" href="#0">{`${toggle} autoplay`}</a>
+    <div className='tc'>
+      <div className="f6 link br-pill ph3 pv2 mb2 dib gray bg-light-green pointer"
+            onClick={toggleTimer}>{`${toggle} autoplay`}</div>
     </div>
   );
 };
