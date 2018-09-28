@@ -37,7 +37,7 @@ class Gallery extends Component {
   }
 
   getSearchImages = () => {
-    const {searchTerm} = this.state;
+    const {searchTerm, images} = this.state;
     const query = searchTerm.replace(/ /g, '+');
     const caption = searchTerm.replace(/ /g, '');
 
@@ -54,11 +54,13 @@ class Gallery extends Component {
       .then(giphies=> {
         if(giphies.length) {
           this.setState({
+            activeImage: giphies[0].active,
             images: giphies,
             caption: `#${caption}`
-          });
+          })
         } else {
           this.setState({
+            activeImage: "https://media3.giphy.com/media/l3q30VK7ItN9a3Zg4/200.gif",
             images: [{inactive: "https://media3.giphy.com/media/l3q30VK7ItN9a3Zg4/giphy_s.gif", active: "https://media3.giphy.com/media/l3q30VK7ItN9a3Zg4/200.gif"}],
             caption: 'No results'
           });
