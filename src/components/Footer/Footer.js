@@ -2,7 +2,7 @@ import React from 'react';
 
 const Footer = () => {
   return(
-    <div>
+    <div className='tr mt5'>
       <img src={require('./giphyattribution.png')} alt="GIPHY"/>
     </div>
   );

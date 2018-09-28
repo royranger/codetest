@@ -10,7 +10,7 @@ class Gallery extends Component {
     super(props);
     this.state = {
       activeImage: '',
-      images: [{active: "https://media3.giphy.com/media/RLVcsR93HsqlIefxAs/200.gif"}],
+      images: [{active: "https://media1.giphy.com/media/xUPGGDNsLvqsBOhuU0/200.gif"}],
       caption: '#trending',
       searchTerm: ''
     }
@@ -50,15 +50,22 @@ class Gallery extends Component {
         });
       })
       .then(giphies=> {
-        this.setState({
-          images: giphies,
-          caption: `#${caption}`
-        });
+        if(giphies.length) {
+          this.setState({
+            images: giphies,
+            caption: `#${caption}`
+          });
+        } else {
+          this.setState({
+            images: [{inactive: "https://media3.giphy.com/media/l3q30VK7ItN9a3Zg4/giphy_s.gif", active: "https://media3.giphy.com/media/l3q30VK7ItN9a3Zg4/200.gif"}],
+            caption: 'No results'
+          });
+        }
       })
   }
 
   handleEnter = (event) => {
-    if (event.key === 'Enter') {
+    if (event.key === 'Enter' && this.state.searchTerm) {
       this.getSearchImages();
     }
   }
@@ -107,7 +114,7 @@ class Gallery extends Component {
     const {activeImage, images, caption} = this.state;
 
     return(
-      <div>
+      <div id='gallery' className='center'>
         <h1 className='f1 tc'>GIF GALLERY</h1>
 
         <Searchbox onSearchChange={this.onSearchChange}
