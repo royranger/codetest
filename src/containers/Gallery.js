@@ -46,6 +46,20 @@ class Gallery extends Component {
     setTimeout(this.autoChangeImage, 3000);
   }
 
+  deleteThumbnail = (index) => {
+    const confirmDelete = window.confirm("Delete this gif?");
+    const giphies = this.state.images;
+
+    if (confirmDelete) {
+      giphies.splice(index, 1);
+      this.setState({
+        images: giphies
+      });
+    } else {
+      return;
+    }
+  }
+
   componentDidMount() {
     this.populateImages();
     this.autoChangeImage();
@@ -64,7 +78,8 @@ class Gallery extends Component {
 
 
         <GalleryThumb images={images}
-                      updateActiveImage={this.updateActiveImage}/>
+                      updateActiveImage={this.updateActiveImage}
+                      deleteThumbnail={this.deleteThumbnail}/>
         <Footer/>
 
       </div>
