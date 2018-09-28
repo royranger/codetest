@@ -8,8 +8,9 @@ class Gallery extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      activeImage: 'https://media1.giphy.com/media/QNWKbJNASBum8G54t6/giphy.gif',
-      images: [{inactive: "https://media0.giphy.com/media/9tXzHqBALgR0NcbXG4/giphy_s.gif", active: "https://media0.giphy.com/media/9tXzHqBALgR0NcbXG4/giphy.gif"}]
+      activeImage: '',
+      images: [{active: "https://media3.giphy.com/media/RLVcsR93HsqlIefxAs/200.gif"}],
+      caption: '#trending'
     }
   }
 
@@ -20,7 +21,7 @@ class Gallery extends Component {
         return resp.data.map(gif=> {
           return({
             inactive: gif.images.original_still.url,
-            active: gif.images.original.url
+            active: gif.images.fixed_height.url
           });
         });
       })
@@ -37,13 +38,13 @@ class Gallery extends Component {
     });
   }
 
-  autoChangeImage = () => {
+  autoSetImage = () => {
     const {images} = this.state;
     const randomGifIndex = Math.floor(Math.random()*images.length);
     this.setState({
       activeImage: images[randomGifIndex].active
     });
-    setTimeout(this.autoChangeImage, 3000);
+    setTimeout(this.autoSetImage, 3000);
   }
 
   deleteThumbnail = (index) => {
@@ -62,19 +63,24 @@ class Gallery extends Component {
 
   componentDidMount() {
     this.populateImages();
-    this.autoChangeImage();
+    this.autoSetImage();
   }
 
   render () {
-    const {activeImage, images} = this.state;
+    const {activeImage, images, caption} = this.state;
 
     return(
       <div>
         <h1 className='f1 tc'>GIF GALLERY</h1>
+        <div className='polaroidcontainer tc'>
+          <div className='polaroid dib' caption={caption}>
+            <img src={activeImage}
+                 alt="activeimage"
+                 className="vh-40 center db"/>
+          </div>
+        </div>
 
-          <img src={activeImage}
-               alt="activeimage"
-               className="mw-100 vh-50 center db"/>
+
 
 
         <GalleryThumb images={images}
