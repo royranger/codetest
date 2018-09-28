@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import './Gallery.css';
 import Searchbox from '../components/Searchbox';
+import ToggleTimer from '../components/ToggleTimer';
 import GalleryThumb from '../components/GalleryThumb/GalleryThumb';
 import Footer from '../components/Footer/Footer';
 
@@ -12,7 +13,8 @@ class Gallery extends Component {
       activeImage: '',
       images: [{active: "https://media1.giphy.com/media/xUPGGDNsLvqsBOhuU0/200.gif"}],
       caption: '#trending',
-      searchTerm: ''
+      searchTerm: '',
+      timer: true
     }
   }
 
@@ -77,12 +79,28 @@ class Gallery extends Component {
   }
 
   autoSetImage = () => {
-    const {images} = this.state;
+    const {images, timer} = this.state;
     const randomGifIndex = Math.floor(Math.random()*images.length);
-    this.setState({
-      activeImage: images[randomGifIndex].active
-    });
-    setTimeout(this.autoSetImage, 3000);
+    if (timer) {
+      this.setState({
+        activeImage: images[randomGifIndex].active
+      });
+      setTimeout(this.autoSetImage, 3000);
+    }
+  }
+
+  toggleTimer = () => {
+    const {timer} = this.state;
+    if (timer) {
+      this.setState({
+        timer: false
+      });
+    } else {
+      this.setState({
+        timer: true
+      });
+      setTimeout(this.autoSetImage, 3000);
+    }
   }
 
   onSearchChange = (event) => {
@@ -111,7 +129,7 @@ class Gallery extends Component {
   }
 
   render () {
-    const {activeImage, images, caption} = this.state;
+    const {activeImage, images, caption, timer} = this.state;
 
     return(
       <div id='gallery' className='center'>
@@ -128,10 +146,15 @@ class Gallery extends Component {
                  className="vh-40 center db"/>
           </div>
         </div>
+        <ToggleTimer toggleTimer={this.toggleTimer}
+                     timer={timer}/>
 
         <GalleryThumb images={images}
                       updateActiveImage={this.updateActiveImage}
                       deleteThumbnail={this.deleteThumbnail}/>
+
+
+
         <Footer/>
 
       </div>
