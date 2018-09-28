@@ -1,0 +1,10 @@
+#delete {
+  position: absolute;
+  right: 0;
+  top: 0;
+  display: none;
+}
+
+#thumbnail:hover #delete {
+  display: block;
+}

@@ -5,6 +5,7 @@
   "keywords": [],
   "main": "index.js",
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.4",
     "react": "16.0.0",
     "react-dom": "16.0.0",
     "tachyons": "^4.11.1"

@@ -1,5 +1,5 @@
 import React from 'react';
-import Thumbnail from '../Thumbnail';
+import Thumbnail from '../Thumbnail/Thumbnail';
 import './GalleryThumb.css';
 
 const GalleryThumb = ({images, updateActiveImage}) => {

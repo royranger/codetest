@@ -3,6 +3,7 @@ import './Gallery.css';
 import GalleryThumb from '../components/GalleryThumb/GalleryThumb';
 import Footer from '../components/Footer/Footer';
 
+
 class Gallery extends Component {
   constructor(props) {
     super(props);
@@ -56,9 +57,12 @@ class Gallery extends Component {
     return(
       <div>
         <h1 className='f1 tc'>GIF GALLERY</h1>
-        <img src={activeImage}
-             alt="activeimage"
-             className="mw-100 vh-50 center db"/>
+
+          <img src={activeImage}
+               alt="activeimage"
+               className="mw-100 vh-50 center db"/>
+
+
         <GalleryThumb images={images}
                       updateActiveImage={this.updateActiveImage}/>
         <Footer/>
