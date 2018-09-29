@@ -76,9 +76,17 @@ class Gallery extends Component {
   }
 
   updateActiveImage = (newImage) => {
-    this.setState({
-      activeImage: newImage
-    });
+    const {timer} = this.state;
+    if (timer) {
+      this.setState({
+        activeImage: newImage,
+        timer: false
+      });
+    } else {
+      this.setState({
+        activeImage: newImage
+      });
+    }
   }
 
   autoSetImage = () => {
