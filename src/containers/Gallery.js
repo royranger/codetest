@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import './Gallery.css';
 import Searchbox from '../components/Searchbox';
+import Slideshow from '../components/Slideshow/Slideshow';
 import ToggleTimer from '../components/ToggleTimer';
 import GalleryThumb from '../components/GalleryThumb/GalleryThumb';
 import Footer from '../components/Footer/Footer';
@@ -10,7 +11,7 @@ class Gallery extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      activeImage: '',
+      activeImage: 'https://media1.giphy.com/media/xUPGGDNsLvqsBOhuU0/200.gif',
       images: [{active: "https://media1.giphy.com/media/xUPGGDNsLvqsBOhuU0/200.gif"}],
       caption: '#trending',
       searchTerm: '',
@@ -125,6 +126,7 @@ class Gallery extends Component {
     }
   }
 
+
   componentDidMount() {
     this.getImages();
     this.autoSetImage();
@@ -142,13 +144,9 @@ class Gallery extends Component {
                      getSearchImages={this.getSearchImages}
                      handleEnter={this.handleEnter}/>
 
-          <div className='polaroidcontainer tc'>
-            <div className='polaroid dib' caption={caption}>
-              <img src={activeImage}
-                   alt="activeimage"
-                   className="vh-40 center db"/>
-            </div>
-          </div>
+          <Slideshow activeImage={activeImage}
+                     caption={caption}/>
+
           <ToggleTimer toggleTimer={this.toggleTimer}
                        timer={timer}/>
 

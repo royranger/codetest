@@ -15,34 +15,3 @@ h1 {
   font-family: 'Fredericka the Great', cursive;
   color: #7F7F7F;
 }
-
-/* .polaroidcontainer {
-  position: relative;
-  background-color: rgba(0, 0, 0, 0, 0);
-  height: 500px;
-} */
-
-.polaroid {
-  /* left: 25%;  */
-  position: relative;
-  margin-bottom: 50px;
-  border: 1px solid darkgrey;
-  background-color: white;
-  padding: 15px 15px 60px 15px;
-  box-shadow: 5px 10px 10px darkgrey;
-  transform: rotate(5deg);
-    -ms-transform: rotate(5deg);
-    -webkit-transform: rotate(5deg);
-}
-
-.polaroid:after {
-  content: attr(caption);
-    position: absolute;
-    bottom: 0px;
-    left: 0px;
-    width: calc(100% - 20px);
-    padding: 10px;
-    font-size: 1.5em;
-    text-align: center;
-    font-family: 'La Belle Aurore', cursive;
-}

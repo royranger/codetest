@@ -1,0 +1,51 @@
+#caption {
+  font-size: 1.5em;
+  font-family: 'La Belle Aurore', cursive;
+  display: inline-block;
+  background-color: white;
+  transform: rotate(-6deg);
+    -ms-transform: rotate(-6deg);
+    -webkit-transform: rotate(-6deg);
+}
+
+.tv {
+    height: 40vh;
+    width: 400px;
+    max-width: 90%;
+    overflow: hidden;
+    border: solid grey 15px;
+    border-radius: 70px;
+}
+
+.slideshow-gif {
+    z-index: -1;
+    position: absolute;
+    display: block;
+    height: 100%;
+    width: 100%;
+    transition: left 1s ease-in-out;
+}
+
+.slideshow-appear {
+    left: 0;
+}
+
+.slideshow-appear-active {
+    left: 0;
+}
+
+.slideshow-enter {
+    left: -100%;
+}
+
+.slideshow-enter-active {
+    left: 0;
+}
+
+.slideshow-leave {
+    left: 0;
+}
+
+.slideshow-leave-active {
+    left: 100%;
+}
