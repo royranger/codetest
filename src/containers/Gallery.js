@@ -3,7 +3,7 @@ import './Gallery.css';
 import Searchbox from '../components/Searchbox';
 import Slideshow from '../components/Slideshow/Slideshow';
 import ToggleTimer from '../components/ToggleTimer';
-import GalleryThumb from '../components/GalleryThumb/GalleryThumb';
+import GalleryThumb from '../components/GalleryThumb';
 import Footer from '../components/Footer/Footer';
 
 
@@ -38,6 +38,21 @@ class Gallery extends Component {
       })
   }
 
+  onSearchChange = (event) => {
+    this.setState({
+      searchTerm: event.target.value
+    });
+  }
+
+  handleEnter = (event) => {
+    if (event.key === 'Enter' && this.state.searchTerm) {
+      this.getSearchImages();
+      this.setState({
+        searchTerm: ''
+      });
+    }
+  }
+
   getSearchImages = () => {
     const {searchTerm} = this.state;
     const query = searchTerm.replace(/ /g, '+');
@@ -70,14 +85,6 @@ class Gallery extends Component {
       })
   }
 
-  handleEnter = (event) => {
-    if (event.key === 'Enter' && this.state.searchTerm) {
-      this.getSearchImages();
-      this.setState({
-        searchTerm: ''
-      });
-    }
-  }
 
   updateActiveImage = (newImage) => {
     const {timer} = this.state;
@@ -118,12 +125,6 @@ class Gallery extends Component {
     }
   }
 
-  onSearchChange = (event) => {
-    this.setState({
-      searchTerm: event.target.value
-    });
-  }
-
   deleteThumbnail = (index) => {
     const confirmDelete = window.confirm("Delete this gif?");
     const giphies = this.state.images;
@@ -162,7 +163,8 @@ class Gallery extends Component {
     return(
       <div id='gallery' className='center tc'>
         <div id='wrapper'>
-          <h1 className='f1 tc pointer dib' onClick={this.backToTrending}>GIF GALLERY</h1>
+          <h1 className='f1 tc pointer dib'
+              onClick={this.backToTrending}>GIF GALLERY</h1>
 
           <Searchbox onSearchChange={this.onSearchChange}
                      getSearchImages={this.getSearchImages}
@@ -180,13 +182,10 @@ class Gallery extends Component {
                         deleteThumbnail={this.deleteThumbnail}/>
         </div>
 
-
         <Footer/>
-
       </div>
     );
   }
-
 }
 
 export default Gallery;

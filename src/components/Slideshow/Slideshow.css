@@ -21,7 +21,6 @@
 .slideshow-gif {
     z-index: -1;
     position: absolute;
-    display: block;
     height: 100%;
     width: 100%;
     transition: left 1s ease-in-out;

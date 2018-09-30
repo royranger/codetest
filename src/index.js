@@ -17,22 +17,4 @@ import 'tachyons';
 // 7. Add a slick animation to transition between active images (that's more complex then just opacity)
 // 8. Add any extra styling & behaviour to make it look polished
 
-
-// class Gallery extends Component {
-//
-//   render() {
-//     return (
-//       <div>
-//         [ Active Gallery Image Here ]
-//     {/*Include thumbnails here*/}
-//       </div>
-//     )
-//   }
-// }
-//
-//
-// class GalleryThumb extends Component {
-//   /* Thumbnails */
-// }
-
 render(<Gallery />, document.getElementById('root'));
