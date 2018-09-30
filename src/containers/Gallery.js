@@ -32,7 +32,8 @@ class Gallery extends Component {
       })
       .then(giphies=> {
         this.setState({
-          images: giphies
+          images: giphies,
+          activeImage: giphies[0].active
         });
       })
   }
@@ -72,6 +73,9 @@ class Gallery extends Component {
   handleEnter = (event) => {
     if (event.key === 'Enter' && this.state.searchTerm) {
       this.getSearchImages();
+      this.setState({
+        searchTerm: ''
+      });
     }
   }
 
@@ -134,6 +138,18 @@ class Gallery extends Component {
     }
   }
 
+  backToTrending = () => {
+    const {caption} = this.state;
+    if (caption === '#trending') {
+      return;
+    } else {
+      this.getImages();
+      this.setState({
+        caption: '#trending'
+      });
+    }
+  }
+
 
   componentDidMount() {
     this.getImages();
@@ -141,16 +157,17 @@ class Gallery extends Component {
   }
 
   render () {
-    const {activeImage, images, caption, timer} = this.state;
+    const {activeImage, images, caption, timer, searchTerm} = this.state;
 
     return(
-      <div id='gallery' className='center'>
+      <div id='gallery' className='center tc'>
         <div id='wrapper'>
-          <h1 className='f1 tc'>GIF GALLERY</h1>
+          <h1 className='f1 tc pointer dib' onClick={this.backToTrending}>GIF GALLERY</h1>
 
           <Searchbox onSearchChange={this.onSearchChange}
                      getSearchImages={this.getSearchImages}
-                     handleEnter={this.handleEnter}/>
+                     handleEnter={this.handleEnter}
+                     searchTerm={searchTerm}/>
 
           <Slideshow activeImage={activeImage}
                      caption={caption}/>
