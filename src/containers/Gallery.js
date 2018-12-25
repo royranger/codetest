@@ -104,9 +104,11 @@ class Gallery extends Component {
     const {images, timer} = this.state;
     const randomGifIndex = Math.floor(Math.random()*images.length);
     if (timer) {
-      this.setState({
-        activeImage: images[randomGifIndex].active
-      });
+      if (images.length) {
+        this.setState({
+          activeImage: images[randomGifIndex].active
+        });
+      }
       setTimeout(this.autoSetImage, 3000);
     }
   }
